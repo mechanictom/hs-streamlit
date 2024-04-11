@@ -28,11 +28,15 @@ df['Average Age'] = df['Average Age'].fillna(value=0)
 selected = st.sidebar.multiselect('What data you need to show?',
                        ['Current', 'Future', 'Historic'])
 
+st.sidebar.divider()
+
 airline = 'Aeroflot'
 airline = st.sidebar.selectbox('What airline', df['Airline'].unique())
 
 st.dataframe(df.query('Airline == @airline')[['Aircraft Type'] + selected])
 
-st.write('Showing ' + ' '.join(selected) + ' fleet for ' + airline)
+st.write('Showing ' + ' and '.join(selected) + ' fleet for ' + airline)
 
 st.bar_chart(data=df, x='Aircraft Type', y=selected, color=None, width=0, height=0, use_container_width=True)
+
+st.metric('Size of the Fleet', df.loc[df['Airline'] == airline, 'Current'].sum())
