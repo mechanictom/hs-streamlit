@@ -37,6 +37,6 @@ st.dataframe(df.query('Airline == @airline')[['Aircraft Type'] + selected])
 
 st.write('Showing ' + ' and '.join(selected) + ' fleet for ' + airline)
 
-st.bar_chart(data=df, x='Aircraft Type', y=selected, color=None, width=0, height=0, use_container_width=True)
+st.bar_chart(data=df.query('Airline == @airline'), x='Aircraft Type', y=selected, color=None, width=0, height=0, use_container_width=True)
 
 st.metric('Size of the Fleet', df.loc[df['Airline'] == airline, 'Current'].sum())
